@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D4CB98B2-9842-47C8-996B-87C454C441D7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>bookface</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8DAD9B08-AE8F-4BD0-AEAA-4159D90E5403</key>
+		<string>ssh://git.corp.yahoo.com/bkobash/ios-class.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>bookface/bookface.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8DAD9B08-AE8F-4BD0-AEAA-4159D90E5403</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://git.corp.yahoo.com/bkobash/ios-class.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8DAD9B08-AE8F-4BD0-AEAA-4159D90E5403</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8DAD9B08-AE8F-4BD0-AEAA-4159D90E5403</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios-class</string>
+		</dict>
+	</array>
+</dict>
+</plist>
