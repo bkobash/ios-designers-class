@@ -11,4 +11,4 @@
 <li>Optional: Placed the post ViewController inside a NavigationController (to get the Back button).</li>
 <li>Optional: Placed the NavigationController inside a TabController (to get the tabs on the bottom).</li>
 </ul>
-<img src="bookface.gif" width="320" height="568" />
+<img src="https://dl.dropboxusercontent.com/u/9604757/yahoo/ios-class/bookface.gif" width="320" height="568" />
