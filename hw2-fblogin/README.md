@@ -17,4 +17,4 @@
 <li>Optional: Tapping the "More" tab reveals a More page, which is scrollable</li>
 <li>Optional: Tapping "Log Out" returns to the login screen</li>
 </ul>
-<img src="hw-fblogin.gif" width="320" height="568" />
+<img src="https://raw.githubusercontent.com/bkobash/ios-designers-class/master/hw2-fblogin/hw2-fblogin.gif" width="320" height="568" />
