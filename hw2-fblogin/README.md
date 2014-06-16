@@ -20,4 +20,4 @@
 <li>Optional: Tapping "Cancel" on Compose presents an Alert dialog. Tapping "Discard" dismisses the Compose screen</li>
 </ul>
 <img src="https://raw.githubusercontent.com/bkobash/ios-designers-class/master/hw2-fblogin/hw2-fblogin.gif" width="320" height="568" /><br />
-<img src="https://raw.githubusercontent.com/bkobash/ios-designers-class/master/hw2-fblogin/hw2-fblogin-compose.gif" width="320" height="568" /><br />
+<img src="https://cloud.githubusercontent.com/assets/1093474/3294080/186a3492-f5a4-11e3-8cae-8b6d4cd39212.gif" width="320" height="568" /><br />
