@@ -8,12 +8,13 @@
 
 #import "NewsFeedViewController.h"
 #import "ProfileViewController.h"
+#import "ComposeViewController.h"
 
 @interface NewsFeedViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingSpinner;
-
+- (IBAction)onStatusButtonTap:(id)sender;
 - (IBAction)onProfileButtonTap:(id)sender;
 
 -(void)showFeed;
@@ -61,6 +62,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onStatusButtonTap:(id)sender {
+    ComposeViewController *composeViewController = [[ComposeViewController alloc] init];
+    composeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:composeViewController animated:YES completion:nil];
 }
 
 - (IBAction)onProfileButtonTap:(id)sender {

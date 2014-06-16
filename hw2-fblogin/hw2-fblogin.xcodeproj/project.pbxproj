@@ -27,6 +27,8 @@
 		1D9B70FC194AE85D00CDC61C /* RequestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9B70FA194AE85D00CDC61C /* RequestsViewController.xib */; };
 		1D9B7100194AEA7000CDC61C /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B70FE194AEA7000CDC61C /* MoreViewController.m */; };
 		1D9B7101194AEA7000CDC61C /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9B70FF194AEA7000CDC61C /* MoreViewController.xib */; };
+		1DF44FD4194F952C00EC27E4 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF44FD2194F952C00EC27E4 /* ComposeViewController.m */; };
+		1DF44FD5194F952C00EC27E4 /* ComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DF44FD3194F952C00EC27E4 /* ComposeViewController.xib */; };
 		1DF6D2FD194E667500EAD7FC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6D2FB194E667500EAD7FC /* ProfileViewController.m */; };
 		1DF6D2FE194E667500EAD7FC /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6D2FC194E667500EAD7FC /* ProfileViewController.xib */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,9 @@
 		1D9B70FD194AEA7000CDC61C /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		1D9B70FE194AEA7000CDC61C /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		1D9B70FF194AEA7000CDC61C /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
+		1DF44FD1194F952C00EC27E4 /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		1DF44FD2194F952C00EC27E4 /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		1DF44FD3194F952C00EC27E4 /* ComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeViewController.xib; sourceTree = "<group>"; };
 		1DF6D2FA194E667500EAD7FC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		1DF6D2FB194E667500EAD7FC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		1DF6D2FC194E667500EAD7FC /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -151,6 +156,9 @@
 				1DF6D2FA194E667500EAD7FC /* ProfileViewController.h */,
 				1DF6D2FB194E667500EAD7FC /* ProfileViewController.m */,
 				1DF6D2FC194E667500EAD7FC /* ProfileViewController.xib */,
+				1DF44FD1194F952C00EC27E4 /* ComposeViewController.h */,
+				1DF44FD2194F952C00EC27E4 /* ComposeViewController.m */,
+				1DF44FD3194F952C00EC27E4 /* ComposeViewController.xib */,
 			);
 			path = "hw2-fblogin";
 			sourceTree = "<group>";
@@ -266,6 +274,7 @@
 				1D9B70F2194ACE0100CDC61C /* LoginViewController.xib in Resources */,
 				1D9B70F7194AE69D00CDC61C /* NewsFeedViewController.xib in Resources */,
 				1D9B70FC194AE85D00CDC61C /* RequestsViewController.xib in Resources */,
+				1DF44FD5194F952C00EC27E4 /* ComposeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +300,7 @@
 				1DF6D2FD194E667500EAD7FC /* ProfileViewController.m in Sources */,
 				1D9B70F1194ACE0100CDC61C /* LoginViewController.m in Sources */,
 				1D9B70F6194AE69D00CDC61C /* NewsFeedViewController.m in Sources */,
+				1DF44FD4194F952C00EC27E4 /* ComposeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
