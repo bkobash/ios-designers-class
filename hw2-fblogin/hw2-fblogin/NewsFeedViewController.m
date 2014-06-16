@@ -41,14 +41,15 @@
     
     // set up left/right buttons
     UIImage *leftButtonImage = [[UIImage imageNamed:@"navbarSearch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:leftButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(onLeftButton:)];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:leftButtonImage style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.leftBarButtonItem = leftButton;
     UIImage *rightButtonImage = [[UIImage imageNamed:@"navbarFriends"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:rightButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(onRightButton:)];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:rightButtonImage style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.rightBarButtonItem = rightButton;
     
     // set up the scroll view
     self.scrollView.contentSize = CGSizeMake(320, 1000);
+    self.scrollView.frame = CGRectMake(0, 455, 320, 410);
     
     // show spinner first, then hide after 2 secs
     self.scrollView.hidden = YES;
@@ -70,6 +71,10 @@
 - (void)showFeed {
     [self.loadingSpinner stopAnimating];
     self.scrollView.hidden = NO;
+    [UIView animateWithDuration:0.5 animations:^{
+         self.scrollView.frame = CGRectMake(0, 45, 320, 459);
+    }
+    completion:nil];
 }
 
 @end
