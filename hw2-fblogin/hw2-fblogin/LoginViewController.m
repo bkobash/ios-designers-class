@@ -73,7 +73,7 @@
     
     [self switchToLoggingIn:YES];
     
-    [self performSelector:@selector(checkLoginFields) withObject:nil afterDelay:3];
+    [self performSelector:@selector(checkLoginFields) withObject:nil afterDelay:2];
 }
 
 - (IBAction)onBodyTap:(id)sender {

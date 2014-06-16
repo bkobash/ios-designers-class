@@ -50,9 +50,9 @@
     // set up the scroll view
     self.scrollView.contentSize = CGSizeMake(320, 1000);
     
-    // show spinner first, then hide after 3 secs
+    // show spinner first, then hide after 2 secs
     self.scrollView.hidden = YES;
-    [self performSelector:@selector(showFeed) withObject:nil afterDelay:3];
+    [self performSelector:@selector(showFeed) withObject:nil afterDelay:2];
 
 }
 
