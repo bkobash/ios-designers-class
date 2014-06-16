@@ -7,10 +7,16 @@
 //
 
 #import "NewsFeedViewController.h"
+#import "ProfileViewController.h"
 
 @interface NewsFeedViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingSpinner;
+
+- (IBAction)onProfileButtonTap:(id)sender;
+
+-(void)showFeed;
 
 @end
 
@@ -43,6 +49,10 @@
     
     // set up the scroll view
     self.scrollView.contentSize = CGSizeMake(320, 1000);
+    
+    // show spinner first, then hide after 3 secs
+    self.scrollView.hidden = YES;
+    [self performSelector:@selector(showFeed) withObject:nil afterDelay:3];
 
 }
 
@@ -50,6 +60,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onProfileButtonTap:(id)sender {
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
+    [self.navigationController pushViewController:profileViewController animated:YES];
+}
+
+- (void)showFeed {
+    [self.loadingSpinner stopAnimating];
+    self.scrollView.hidden = NO;
 }
 
 @end

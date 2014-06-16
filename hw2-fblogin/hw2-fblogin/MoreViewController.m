@@ -9,6 +9,9 @@
 #import "MoreViewController.h"
 
 @interface MoreViewController ()
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 - (IBAction)onLogoutTap:(id)sender;
 
 @end
@@ -39,6 +42,9 @@
     UIImage *rightButtonImage = [[UIImage imageNamed:@"navbarFriends"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:rightButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(onRightButton:)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    // set up scroll view
+    self.scrollView.contentSize = CGSizeMake(320, 1200);
 }
 
 - (void)didReceiveMemoryWarning

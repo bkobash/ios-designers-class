@@ -27,6 +27,8 @@
 		1D9B70FC194AE85D00CDC61C /* RequestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9B70FA194AE85D00CDC61C /* RequestsViewController.xib */; };
 		1D9B7100194AEA7000CDC61C /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B70FE194AEA7000CDC61C /* MoreViewController.m */; };
 		1D9B7101194AEA7000CDC61C /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9B70FF194AEA7000CDC61C /* MoreViewController.xib */; };
+		1DF6D2FD194E667500EAD7FC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6D2FB194E667500EAD7FC /* ProfileViewController.m */; };
+		1DF6D2FE194E667500EAD7FC /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6D2FC194E667500EAD7FC /* ProfileViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,9 @@
 		1D9B70FD194AEA7000CDC61C /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		1D9B70FE194AEA7000CDC61C /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		1D9B70FF194AEA7000CDC61C /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
+		1DF6D2FA194E667500EAD7FC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		1DF6D2FB194E667500EAD7FC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		1DF6D2FC194E667500EAD7FC /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +148,9 @@
 				1D9B70FD194AEA7000CDC61C /* MoreViewController.h */,
 				1D9B70FE194AEA7000CDC61C /* MoreViewController.m */,
 				1D9B70FF194AEA7000CDC61C /* MoreViewController.xib */,
+				1DF6D2FA194E667500EAD7FC /* ProfileViewController.h */,
+				1DF6D2FB194E667500EAD7FC /* ProfileViewController.m */,
+				1DF6D2FC194E667500EAD7FC /* ProfileViewController.xib */,
 			);
 			path = "hw2-fblogin";
 			sourceTree = "<group>";
@@ -251,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DF6D2FE194E667500EAD7FC /* ProfileViewController.xib in Resources */,
 				1D9B70CA194ACD3100CDC61C /* InfoPlist.strings in Resources */,
 				1D9B7101194AEA7000CDC61C /* MoreViewController.xib in Resources */,
 				1D9B70D2194ACD3100CDC61C /* Images.xcassets in Resources */,
@@ -279,6 +288,7 @@
 				1D9B7100194AEA7000CDC61C /* MoreViewController.m in Sources */,
 				1D9B70D0194ACD3100CDC61C /* AppDelegate.m in Sources */,
 				1D9B70CC194ACD3100CDC61C /* main.m in Sources */,
+				1DF6D2FD194E667500EAD7FC /* ProfileViewController.m in Sources */,
 				1D9B70F1194ACE0100CDC61C /* LoginViewController.m in Sources */,
 				1D9B70F6194AE69D00CDC61C /* NewsFeedViewController.m in Sources */,
 			);
@@ -477,6 +487,7 @@
 				1D9B70EA194ACD3100CDC61C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1D9B70EB194ACD3100CDC61C /* Build configuration list for PBXNativeTarget "hw2-fbloginTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +496,7 @@
 				1D9B70ED194ACD3100CDC61C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
