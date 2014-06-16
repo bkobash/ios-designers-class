@@ -16,5 +16,8 @@
 <li>Optional: Added a Tab Controller, which includes a More tab</li>
 <li>Optional: Tapping the "More" tab reveals a More page, which is scrollable</li>
 <li>Optional: Tapping "Log Out" returns to the login screen</li>
+<li>Optional: Tapping "Status" goes to a Compose screen</li>
+<li>Optional: Tapping "Cancel" on Compose presents an Alert dialog. Tapping "Discard" dismisses the Compose screen</li>
 </ul>
-<img src="https://raw.githubusercontent.com/bkobash/ios-designers-class/master/hw2-fblogin/hw2-fblogin.gif" width="320" height="568" />
+<img src="https://raw.githubusercontent.com/bkobash/ios-designers-class/master/hw2-fblogin/hw2-fblogin.gif" width="320" height="568" /><br />
+<img src="https://raw.githubusercontent.com/bkobash/ios-designers-class/master/hw2-fblogin/hw2-fblogin-compose.gif" width="320" height="568" /><br />
