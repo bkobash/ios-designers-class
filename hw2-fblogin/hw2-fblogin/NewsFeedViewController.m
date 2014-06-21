@@ -17,6 +17,8 @@
 - (IBAction)onStatusButtonTap:(id)sender;
 - (IBAction)onProfileButtonTap:(id)sender;
 
+-(void)onComposeButton;
+
 -(void)showFeed;
 
 @end
@@ -39,6 +41,8 @@
     
     // add title
     self.navigationItem.title = @"News Feed";
+    //self.navigationItem.titleView = [UIImageView ....
+    //UIBarButtonItem *rightComposeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(onComposeButton)];
     
     // set up left/right buttons
     UIImage *leftButtonImage = [[UIImage imageNamed:@"navbarSearch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -82,6 +86,10 @@
          self.scrollView.frame = CGRectMake(0, 45, 320, 459);
     }
     completion:nil];
+}
+
+- (void)onComposeButton {
+    // ...
 }
 
 @end
