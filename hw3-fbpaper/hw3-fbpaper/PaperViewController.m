@@ -86,13 +86,19 @@
     if (sender.state == UIGestureRecognizerStateBegan) {
         
         if (self.slidesExpanded) {
+            
             // user had previously expanded the slides
             self.slidesDragged = YES;
+            self.slideOffsetX = self.slideScrollView.contentOffset.x;
+            
         } else if (location.y < slideDefaultY || self.mainScreenCollapsed) {
+            
             // user started dragging on headline area
             self.originalMainScreenLocation = mainCenter;
             self.mainScreenDragged = YES;
+            
         } else {
+            
             // user started dragged on the slides area
             self.slidesDragged = YES;
             
