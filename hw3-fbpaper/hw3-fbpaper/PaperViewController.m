@@ -23,6 +23,7 @@
 @property (nonatomic) BOOL mainScreenCollapsed;
 @property (nonatomic) BOOL slidesDragged;
 @property (nonatomic) BOOL slidesExpanded;
+@property (nonatomic) int slideSelected;
 
 - (IBAction)onMainScreenDrag:(UIPanGestureRecognizer *)sender;
 - (void) cycleImages;
@@ -93,6 +94,11 @@
         } else {
             // user started dragged on the slides area
             self.slidesDragged = YES;
+            
+            int slidePos = (int) self.slideScrollView.contentOffset.x + location.x;
+            
+            self.slideSelected = slidePos / 144;
+            //NSLog([NSString stringWithFormat:@"%d", self.slideSelected]);
         }
         
     } else if (sender.state == UIGestureRecognizerStateChanged) {
@@ -224,20 +230,10 @@
 
 - (void) resetSlidePositions {
     
-    // once enlarged, the slide scrollview snaps to the nearest slide position.
-    // currently doubling the numbers because of the modulus operator only works
-    // on integers.
+    // once enlarged, the slide scrollview snaps to the selected slide position.
     
-    int slideWidth = 289;
-    int slideOffsetX = (int) self.slideScrollView.contentOffset.x * 2;
-    int slideOffset = slideOffsetX % slideWidth;
-    CGPoint destOffset;
-    
-    if (slideOffset > slideWidth / 2) {
-        destOffset = CGPointMake(((slideOffsetX - slideOffset + slideWidth) / 2), 0);
-    } else {
-        destOffset = CGPointMake(((slideOffsetX - slideOffset) / 2), 0);
-    }
+    float slideWidth = 144.5;
+    CGPoint destOffset = CGPointMake((self.slideSelected * slideWidth), 0);
     
     [self.slideScrollView setContentOffset:destOffset animated:YES];
 }
