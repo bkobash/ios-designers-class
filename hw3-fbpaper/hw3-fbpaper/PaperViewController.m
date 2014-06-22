@@ -24,6 +24,7 @@
 @property (nonatomic) BOOL slidesDragged;
 @property (nonatomic) BOOL slidesExpanded;
 @property (nonatomic) int slideSelected;
+@property (nonatomic) float slideOffsetX;
 
 - (IBAction)onMainScreenDrag:(UIPanGestureRecognizer *)sender;
 - (void) cycleImages;
@@ -96,9 +97,9 @@
             self.slidesDragged = YES;
             
             int slidePos = (int) self.slideScrollView.contentOffset.x + location.x;
-            
             self.slideSelected = slidePos / 144;
-            //NSLog([NSString stringWithFormat:@"%d", self.slideSelected]);
+            
+            self.slideOffsetX = self.slideScrollView.contentOffset.x;
         }
         
     } else if (sender.state == UIGestureRecognizerStateChanged) {
@@ -136,9 +137,11 @@
             CGFloat slideHeight = slideDefaultHeight * scale;
             CGFloat slideX = MIN(0, translation.x * scale);
             CGFloat slideY = self.view.frame.size.height - slideHeight;
+            CGPoint destOffset = CGPointMake(self.slideOffsetX, 0);
             
             self.slideScrollView.transform = CGAffineTransformMakeScale(scale, scale);
             self.slideScrollView.frame = CGRectMake(slideX, slideY, slideWidth, slideHeight);
+            [self.slideScrollView setContentOffset:destOffset animated:NO];
             
             // fade in the "more detailed" slides as the user scales up
             self.slidesBigView.alpha = scale / 2 - .25;
