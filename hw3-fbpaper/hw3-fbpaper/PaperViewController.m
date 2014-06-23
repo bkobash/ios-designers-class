@@ -25,6 +25,9 @@
 @property (nonatomic) BOOL slidesExpanded;
 @property (nonatomic) int slideSelected;
 @property (nonatomic) float slideOffsetX;
+@property (nonatomic) CGAffineTransform originalSlideTransform;
+@property (nonatomic) CGRect originalSlideFrame;
+@property (nonatomic) float originalSlideBigAlpha;
 
 - (IBAction)onMainScreenDrag:(UIPanGestureRecognizer *)sender;
 - (void) cycleImages;
@@ -48,8 +51,6 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    
     
     self.slideScrollView.contentSize = CGSizeMake(1445, 254);
     self.slideScrollView.frame = CGRectMake(0, 314, 320, 254);
@@ -106,6 +107,10 @@
             self.slideSelected = slidePos / 144;
             
             self.slideOffsetX = self.slideScrollView.contentOffset.x;
+            
+            self.originalSlideTransform = self.slideScrollView.transform;
+            self.originalSlideFrame = self.slideScrollView.frame;
+            self.originalSlideBigAlpha = self.slidesBigView.alpha;
         }
         
     } else if (sender.state == UIGestureRecognizerStateChanged) {
@@ -160,7 +165,7 @@
             // user stopped dragging the headline area
             self.mainScreenDragged = NO;
             
-            if (velocity.y > 0) {
+            if (velocity.y > 500) {
                 
                 // user dragged down, collapse the main screen
                 [UIView animateWithDuration:0.3 animations:^{
@@ -168,13 +173,20 @@
                 }];
                 self.mainScreenCollapsed = YES;
                 
-            } else {
+            } else if (velocity.y < -500) {
                 
                 // user dragged up, show the main screen
                 [UIView animateWithDuration:0.3 animations:^{
                     self.mainScreenView.center = CGPointMake(mainWidth / 2, topMainY);
                 }];
                 self.mainScreenCollapsed = NO;
+                
+            } else {
+                
+                // user didn't drag enough, set it back to the original location
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.mainScreenView.center = self.originalMainScreenLocation;
+                }];
                 
             }
             
@@ -183,32 +195,35 @@
             // user stopped dragging the slides area
             self.slidesDragged = NO;
             
-            [self resetSlidePositions];
-            
-            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                if (velocity.y < 0) {
-                    
-                    // the user moved up enough, blow it up
-                    self.slideScrollView.transform =CGAffineTransformMakeScale(slideScale, slideScale);
+            if (velocity.y < -500 || (velocity.y < 0 && location.y < 300)) {
+                // the user moved up enough, blow it up
+                [self resetSlidePositions];
+                [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                    self.slideScrollView.transform = CGAffineTransformMakeScale(slideScale, slideScale);
                     self.slideScrollView.frame = CGRectMake(0, 0, mainWidth, mainHeight);
                     self.slidesBigView.alpha = 1;
-                    
-                } else {
-                    
-                    // the user didn't move up enough, settle it back down
+                } completion:^(BOOL finished) {
+                    self.slidesExpanded = YES;
+                }];
+            } else if (velocity.y > 500) {
+                // the user moved down, settle it back down
+                [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     self.slideScrollView.transform = CGAffineTransformMakeScale(1, 1);
                     self.slideScrollView.frame = CGRectMake(0, slideDefaultY, mainWidth, slideDefaultHeight);
                     self.slidesBigView.alpha = 0;
-                    
-                }
-            } completion:^(BOOL finished) {
-                // done
-                if (velocity.y < 0) {
-                    self.slidesExpanded = YES;
-                } else {
+                } completion:^(BOOL finished) {
                     self.slidesExpanded = NO;
-                }
-            }];
+                }];
+            } else {
+                // the user didn't move up/down enough, reset it back
+                [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                    self.slideScrollView.transform = self.originalSlideTransform;
+                    self.slideScrollView.frame = self.originalSlideFrame;
+                    self.slidesBigView.alpha = self.originalSlideBigAlpha;
+                } completion:^(BOOL finished) {
+                    // done
+                }];
+            }
             
         }
     }
