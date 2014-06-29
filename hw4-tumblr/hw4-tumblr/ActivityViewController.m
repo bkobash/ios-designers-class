@@ -35,6 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    // add nav bar title
     self.navigationItem.title = @"Activity";
     
     self.scrollView.contentSize = CGSizeMake(320, 350);
@@ -48,9 +49,10 @@
 }
 
 - (IBAction)onLoginTap:(id)sender {
-    // NSLog(@"tapped login button");
+    // show login as modal dialog
     [self.view.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
     
+    // animate the textfields up after 0.1sec
     [self.loginViewController performSelector:@selector(bounceLoginBox) withObject:nil afterDelay:0.1];
 }
 @end

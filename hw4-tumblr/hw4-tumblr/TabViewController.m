@@ -55,12 +55,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        // create views for all the different tabs
         self.homeViewController = [[HomeViewController alloc] init];
         self.searchViewController = [[SearchViewController alloc] init];
         self.accountViewController = [[AccountViewController alloc] init];
         self.activityViewController = [[ActivityViewController alloc] init];
         self.composeViewController = [[ComposeViewController alloc] init];
         
+        // enclose the home and activity views in a nav controller
         self.homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeViewController];
         self.activityNavigationController = [[UINavigationController alloc] initWithRootViewController:self.activityViewController];
     }
@@ -72,11 +75,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    // resize the views to match the content container
     self.homeNavigationController.view.frame = self.contentView.frame;
     self.searchViewController.view.frame = self.contentView.frame;
     self.accountViewController.view.frame = self.contentView.frame;
     self.activityNavigationController.view.frame = self.contentView.frame;
     
+    // adjust colors for nav bars (for home, activity)
     self.homeNavigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.homeNavigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     self.homeNavigationController.navigationBar.barTintColor = [[UIColor alloc] initWithRed:46.0/255.0 green:62.0/255.0 blue:83.0/255.0 alpha:1];
@@ -87,11 +92,12 @@
     self.activityNavigationController.navigationBar.barTintColor = [[UIColor alloc] initWithRed:46.0/255.0 green:62.0/255.0 blue:83.0/255.0 alpha:1];
     self.activityNavigationController.navigationBar.translucent = NO;
     
+    // reset selection states for all tabs, set "home" as first selected tab
     [self clearTabs];
     self.tabHome.selected = YES;
-    
     [self.contentView addSubview:self.homeNavigationController.view];
     
+    // show the explore bubble. self.firstLoaded makes sure that it bobs up/down
     self.firstLoaded = YES;
     [self performSelector:@selector(showExploreBubble) withObject:nil afterDelay:0.1];
 }
@@ -154,6 +160,7 @@
     self.tabSearch.selected = YES;
     
     [self.contentView addSubview:self.searchViewController.view];
+    // show the loading animation when the searchViewController first shows up
     [self.searchViewController showLoadingAnimation];
     
     [self hideExploreBubble];
@@ -161,6 +168,8 @@
 
 - (IBAction)onComposeTap:(id)sender {
     [self presentViewController:self.composeViewController animated:NO completion:nil];
+    // show the bounce animation when the modal dialog appears.
+    // this uses a delay of 0.1; doesn't seem to work otherwise
     [self.composeViewController performSelector:@selector(bounceActionsIn) withObject:nil afterDelay:0.1];
 }
 

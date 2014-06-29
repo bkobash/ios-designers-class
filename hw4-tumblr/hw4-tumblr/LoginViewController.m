@@ -49,7 +49,10 @@
 }
 
 - (void)bounceLoginBox {
+    // add focus to the first textfield to show keyboard
     [self.emailTextField becomeFirstResponder];
+    
+    // move the textfields up with spring-like motion
     self.loginBoxView.center = CGPointMake(160, 600);
     [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.loginBoxView.center = CGPointMake(160, 200);

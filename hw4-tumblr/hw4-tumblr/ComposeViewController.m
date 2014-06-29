@@ -49,13 +49,16 @@
 }
 
 - (IBAction)onCancelTap:(id)sender {
+    // move the circles out (to the top)
     [self bounceActionsOut];
     
+    // hide the modal dialog after animations complete
     [self performSelector:@selector(dismissCompose) withObject:nil afterDelay:0.5];
 }
 
 - (void)bounceActionsIn {
     
+    // set up positioning for the circles
     self.composeTextView.center = CGPointMake(self.composeTextView.center.x, 1000);
     self.composePhotoView.center = CGPointMake(self.composePhotoView.center.x, 1000);
     self.composeQuoteView.center = CGPointMake(self.composeQuoteView.center.x, 1000);
@@ -63,6 +66,7 @@
     self.composeChatView.center = CGPointMake(self.composeChatView.center.x, 1000);
     self.composeVideoView.center = CGPointMake(self.composeVideoView.center.x, 1000);
     
+    // animate in the circles at semi-random intervals
     [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.composeTextView.center = CGPointMake(self.composeTextView.center.x, 210);
     } completion:^(BOOL finished) { }];
@@ -89,6 +93,7 @@
 }
 
 - (void)bounceActionsOut {
+    // animate out the circles at semi-random intervals
     [UIView animateWithDuration:0.75 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.composeTextView.center = CGPointMake(self.composeTextView.center.x, -100);
     } completion:^(BOOL finished) { }];

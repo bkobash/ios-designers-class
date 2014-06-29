@@ -36,10 +36,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    // add the Log In button in the nav bar
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(onRightButton)];
     self.navigationItem.rightBarButtonItem = rightButton;
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TumblrLogo"]];
     
+    // set the content size
     self.scrollView.contentSize = CGSizeMake(320, 320);
     self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
@@ -51,8 +53,10 @@
 }
 
 - (void)onRightButton {
+    // show login as a modal dialog
     [self.view.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
     
+    // have the textfield animate up (after a delay of 0.1)
     [self.loginViewController performSelector:@selector(bounceLoginBox) withObject:nil afterDelay:0.1];
 }
 
