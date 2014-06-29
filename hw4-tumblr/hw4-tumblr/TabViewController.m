@@ -26,11 +26,14 @@
 @property (nonatomic, strong) UINavigationController *homeNavigationController;
 @property (nonatomic, strong) UINavigationController *activityNavigationController;
 
+@property (weak, nonatomic) IBOutlet UIImageView *exploreBubbleView;
 @property (weak, nonatomic) IBOutlet UIButton *tabHome;
 @property (weak, nonatomic) IBOutlet UIButton *tabSearch;
 @property (weak, nonatomic) IBOutlet UIButton *buttonCompose;
 @property (weak, nonatomic) IBOutlet UIButton *tabAccount;
 @property (weak, nonatomic) IBOutlet UIButton *tabActivity;
+
+@property (nonatomic) BOOL firstLoaded;
 
 - (IBAction)onHomeTap:(id)sender;
 - (IBAction)onSearchTap:(id)sender;
@@ -39,6 +42,9 @@
 - (IBAction)onActivityTap:(id)sender;
 
 - (void) clearTabs;
+- (void) showExploreBubble;
+- (void) hideExploreBubble;
+
 
 @end
 
@@ -85,6 +91,9 @@
     self.tabHome.selected = YES;
     
     [self.contentView addSubview:self.homeNavigationController.view];
+    
+    self.firstLoaded = YES;
+    [self performSelector:@selector(showExploreBubble) withObject:nil afterDelay:0.1];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,11 +109,44 @@
     self.tabActivity.selected = NO;
 }
 
+- (void) showExploreBubble {
+    
+    CGPoint originalLocation = CGPointMake(self.exploreBubbleView.center.x, 490);
+    
+    if (self.exploreBubbleView.alpha == 0 || self.firstLoaded) {
+        self.firstLoaded = NO;
+        // first, move up the bubble
+        [UIView animateWithDuration:0.5 delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^{
+            self.exploreBubbleView.center = CGPointMake(originalLocation.x, originalLocation.y);
+            self.exploreBubbleView.alpha = 1;
+        } completion:^(BOOL finished) {
+            // then, make it bob up and down
+            [UIView animateWithDuration:1.5 delay:0 options:(UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat) animations:^{
+                self.exploreBubbleView.center = CGPointMake(originalLocation.x, originalLocation.y + 10);
+            } completion:nil];
+        }];
+    }
+}
+
+- (void) hideExploreBubble {
+    
+    CGPoint originalLocation = CGPointMake(self.exploreBubbleView.center.x, 490);
+    
+    if (self.exploreBubbleView.alpha == 1) {
+        // fade the bubble out
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.exploreBubbleView.alpha = 0;
+            self.exploreBubbleView.center = CGPointMake(originalLocation.x, 530);
+        } completion:nil];
+    }
+}
+
 - (IBAction)onHomeTap:(id)sender {
     [self clearTabs];
     self.tabHome.selected = YES;
     
     [self.contentView addSubview:self.homeNavigationController.view];
+    [self showExploreBubble];
 }
 
 - (IBAction)onSearchTap:(id)sender {
@@ -113,6 +155,8 @@
     
     [self.contentView addSubview:self.searchViewController.view];
     [self.searchViewController showLoadingAnimation];
+    
+    [self hideExploreBubble];
 }
 
 - (IBAction)onComposeTap:(id)sender {
@@ -125,6 +169,7 @@
     self.tabAccount.selected = YES;
     
     [self.contentView addSubview:self.accountViewController.view];
+    [self showExploreBubble];
 }
 
 - (IBAction)onActivityTap:(id)sender {
@@ -132,5 +177,6 @@
     self.tabActivity.selected = YES;
     
     [self.contentView addSubview:self.activityNavigationController.view];
+    [self showExploreBubble];
 }
 @end

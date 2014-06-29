@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="buttonCompose" destination="0vX-G8-NAH" id="nvX-DY-l3X"/>
                 <outlet property="contentView" destination="fyJ-CR-waG" id="EXI-Ii-S2x"/>
+                <outlet property="exploreBubbleView" destination="FTb-gk-ji5" id="vYB-Q8-9z1"/>
                 <outlet property="tabAccount" destination="atI-yX-zcm" id="O0B-rj-7gr"/>
                 <outlet property="tabActivity" destination="VZW-Di-K28" id="5JB-PM-DII"/>
                 <outlet property="tabHome" destination="h3L-H2-x2l" id="Ujw-Vd-6q7"/>
@@ -85,6 +86,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ExploreBubble" translatesAutoresizingMaskIntoConstraints="NO" id="FTb-gk-ji5">
+                    <rect key="frame" x="11" y="465" width="172" height="64"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.20392156862745098" green="0.27450980392156865" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -92,6 +97,7 @@
         </view>
     </objects>
     <resources>
+        <image name="ExploreBubble" width="172" height="64"/>
         <image name="TabAccountOff" width="35" height="35"/>
         <image name="TabAccountOn" width="35" height="35"/>
         <image name="TabCompose" width="50" height="35"/>
