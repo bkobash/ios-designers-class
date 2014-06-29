@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B29F113A-AB50-469E-81FB-142840C41E39</string>
+	<key>IDESourceControlProjectName</key>
+	<string>hw4-tumblr</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>56BA574B-FE3C-46D9-B374-6284D6C1D9AA</key>
+		<string>ssh://github.com/bkobash/ios-designers-class.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>hw4-tumblr/hw4-tumblr.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>56BA574B-FE3C-46D9-B374-6284D6C1D9AA</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/bkobash/ios-designers-class.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>56BA574B-FE3C-46D9-B374-6284D6C1D9AA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>56BA574B-FE3C-46D9-B374-6284D6C1D9AA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios-designers-class</string>
+		</dict>
+	</array>
+</dict>
+</plist>
