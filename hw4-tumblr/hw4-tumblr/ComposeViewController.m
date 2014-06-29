@@ -19,9 +19,10 @@
 
 - (IBAction)onCancelTap:(id)sender;
 
+- (void)dismissCompose;
 - (void)bounceActionsIn;
 - (void)bounceActionsOut;
-- (void)dismissCompose;
+- (void)bounceAction:(UIImageView *)image withDelay:(float)delayTime toDestinationY:(int)destY fromBottom:(BOOL)bottom;
 
 @end
 
@@ -57,65 +58,37 @@
 }
 
 - (void)bounceActionsIn {
-    
-    // set up positioning for the circles
-    self.composeTextView.center = CGPointMake(self.composeTextView.center.x, 1000);
-    self.composePhotoView.center = CGPointMake(self.composePhotoView.center.x, 1000);
-    self.composeQuoteView.center = CGPointMake(self.composeQuoteView.center.x, 1000);
-    self.composeLinkView.center = CGPointMake(self.composeLinkView.center.x, 1000);
-    self.composeChatView.center = CGPointMake(self.composeChatView.center.x, 1000);
-    self.composeVideoView.center = CGPointMake(self.composeVideoView.center.x, 1000);
-    
     // animate in the circles at semi-random intervals
-    [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeTextView.center = CGPointMake(self.composeTextView.center.x, 210);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:1 delay:0.5 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composePhotoView.center = CGPointMake(self.composePhotoView.center.x, 210);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:1 delay:0.25 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeQuoteView.center = CGPointMake(self.composeQuoteView.center.x, 210);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:1 delay:0.75 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeLinkView.center = CGPointMake(self.composeLinkView.center.x, 330);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeChatView.center = CGPointMake(self.composeChatView.center.x, 330);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:1 delay:0.5 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeVideoView.center = CGPointMake(self.composeVideoView.center.x, 330);
-    } completion:^(BOOL finished) { }];
+    [self bounceAction:self.composeTextView withDelay:0 toDestinationY:210 fromBottom:YES];
+    [self bounceAction:self.composePhotoView withDelay:0.5 toDestinationY:210 fromBottom:YES];
+    [self bounceAction:self.composeQuoteView withDelay:0.25 toDestinationY:210 fromBottom:YES];
+    [self bounceAction:self.composeLinkView withDelay:0.75 toDestinationY:330 fromBottom:YES];
+    [self bounceAction:self.composeChatView withDelay:0 toDestinationY:330 fromBottom:YES];
+    [self bounceAction:self.composeVideoView withDelay:0.5 toDestinationY:330 fromBottom:YES];
 }
 
 - (void)bounceActionsOut {
     // animate out the circles at semi-random intervals
-    [UIView animateWithDuration:0.75 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeTextView.center = CGPointMake(self.composeTextView.center.x, -100);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:0.5 delay:0.1 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composePhotoView.center = CGPointMake(self.composePhotoView.center.x, -100);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:0.75 delay:0.1 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeQuoteView.center = CGPointMake(self.composeQuoteView.center.x, -100);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:0.5 delay:0.2 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeLinkView.center = CGPointMake(self.composeLinkView.center.x, -100);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:0.75 delay:0.1 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeChatView.center = CGPointMake(self.composeChatView.center.x, -100);
-    } completion:^(BOOL finished) { }];
-    
-    [UIView animateWithDuration:0.5 delay:0.2 usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.composeVideoView.center = CGPointMake(self.composeVideoView.center.x, -100);
+    [self bounceAction:self.composeTextView withDelay:0 toDestinationY:0 fromBottom:NO];
+    [self bounceAction:self.composePhotoView withDelay:0.1 toDestinationY:0 fromBottom:NO];
+    [self bounceAction:self.composeQuoteView withDelay:0.1 toDestinationY:0 fromBottom:NO];
+    [self bounceAction:self.composeLinkView withDelay:0.2 toDestinationY:0 fromBottom:NO];
+    [self bounceAction:self.composeChatView withDelay:0.1 toDestinationY:0 fromBottom:NO];
+    [self bounceAction:self.composeVideoView withDelay:0.2 toDestinationY:0 fromBottom:NO];
+}
+
+- (void)bounceAction:(UIImageView *)image withDelay:(float)delayTime toDestinationY:(int)destY fromBottom:(BOOL)bottom {
+    float duration = 1;
+    if (bottom) {
+        // action comes from the bottom
+        image.center = CGPointMake(image.center.x, 1000);
+    } else {
+        // action moves to the top, much quicker
+        destY = -100;
+        duration = 0.5;
+    }
+    [UIView animateWithDuration:duration delay:delayTime usingSpringWithDamping:0.6 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        image.center = CGPointMake(image.center.x, destY);
     } completion:^(BOOL finished) { }];
 }
 

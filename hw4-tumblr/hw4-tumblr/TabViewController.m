@@ -44,8 +44,7 @@
 - (void) clearTabs;
 - (void) showExploreBubble;
 - (void) hideExploreBubble;
-
-
+- (void) retintNavbar:(UINavigationController *)navController;
 @end
 
 @implementation TabViewController
@@ -82,15 +81,8 @@
     self.activityNavigationController.view.frame = self.contentView.frame;
     
     // adjust colors for nav bars (for home, activity)
-    self.homeNavigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.homeNavigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    self.homeNavigationController.navigationBar.barTintColor = [[UIColor alloc] initWithRed:46.0/255.0 green:62.0/255.0 blue:83.0/255.0 alpha:1];
-    self.homeNavigationController.navigationBar.translucent = NO;
-    
-    self.activityNavigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.activityNavigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    self.activityNavigationController.navigationBar.barTintColor = [[UIColor alloc] initWithRed:46.0/255.0 green:62.0/255.0 blue:83.0/255.0 alpha:1];
-    self.activityNavigationController.navigationBar.translucent = NO;
+    [self retintNavbar:self.homeNavigationController];
+    [self retintNavbar:self.activityNavigationController];
     
     // reset selection states for all tabs, set "home" as first selected tab
     [self clearTabs];
@@ -115,7 +107,14 @@
     self.tabActivity.selected = NO;
 }
 
-- (void) showExploreBubble {
+- (void)retintNavbar:(UINavigationController *)navController {
+    navController.navigationBar.tintColor = [UIColor whiteColor];
+    navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    navController.navigationBar.barTintColor = [[UIColor alloc] initWithRed:46.0/255.0 green:62.0/255.0 blue:83.0/255.0 alpha:1];
+    navController.navigationBar.translucent = NO;
+}
+
+- (void)showExploreBubble {
     
     CGPoint originalLocation = CGPointMake(self.exploreBubbleView.center.x, 490);
     
@@ -134,7 +133,7 @@
     }
 }
 
-- (void) hideExploreBubble {
+- (void)hideExploreBubble {
     
     CGPoint originalLocation = CGPointMake(self.exploreBubbleView.center.x, 490);
     
