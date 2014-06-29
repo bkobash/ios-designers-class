@@ -1,5 +1,5 @@
 <h1>Tumblr</h1>
-<h3>Hours required to complete: ~4</h3>
+<h3>Hours required to complete: ~5</h3>
 <h3>Required/optional stories:</h3>
 <ul>
 <li>Tab bar is implemented as a view with 5 buttons</li>
