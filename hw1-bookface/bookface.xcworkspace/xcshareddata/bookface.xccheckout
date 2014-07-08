@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>3856F04D-2470-4BDD-BD59-B4AB8A4C2918</string>
+	<string>9026FF6B-9C4E-4EA1-931C-C9EACBE81486</string>
 	<key>IDESourceControlProjectName</key>
 	<string>bookface</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>33816F96-6A65-4C1C-B165-68D8A9CC4022</key>
+		<key>56BA574B-FE3C-46D9-B374-6284D6C1D9AA</key>
 		<string>ssh://github.com/bkobash/ios-designers-class.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>hw1-bookface/bookface.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>33816F96-6A65-4C1C-B165-68D8A9CC4022</key>
+		<key>56BA574B-FE3C-46D9-B374-6284D6C1D9AA</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>33816F96-6A65-4C1C-B165-68D8A9CC4022</string>
+	<string>56BA574B-FE3C-46D9-B374-6284D6C1D9AA</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>33816F96-6A65-4C1C-B165-68D8A9CC4022</string>
+			<string>56BA574B-FE3C-46D9-B374-6284D6C1D9AA</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ios-designers-class</string>
 		</dict>
