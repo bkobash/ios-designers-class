@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-TTTAttributedLabel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>6513FB144F5248D49AF153AA</key>
+		<key>1298F3A1345A4FF097F9DCE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D8E109F78F4347AC87EDAA52</key>
+		<key>184E4F2823DE42879A16E976</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>700E0C0FB6264C6F9FE659BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

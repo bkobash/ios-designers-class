@@ -22,4 +22,11 @@
     // Configure the view for the selected state
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    for(UIView *subview in [self.contentView subviews]) {
+        [subview removeFromSuperview];
+    }
+}
+
 @end
