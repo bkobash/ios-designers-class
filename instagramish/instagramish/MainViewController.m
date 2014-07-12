@@ -88,13 +88,13 @@
     
     NSDictionary *photoInfo = self.photos[indexPath.section];
     NSString *url = photoInfo[@"images"][@"standard_resolution"][@"url"];
-    NSDictionary *commentInfo = photoInfo[@"comments"][@"data"][indexPath.row];
 
     if (indexPath.row == 0) {
         PhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PhotoCell"];
         [cell.photoView setImageWithURL:[NSURL URLWithString:url]];
         return cell;
     } else {
+        NSDictionary *commentInfo = photoInfo[@"comments"][@"data"][indexPath.row - 1];
         CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
         
         TTTAttributedLabel *commentLabel = [self commentLabelWithText:commentInfo[@"text"] withUsername:commentInfo[@"from"][@"username"]];
@@ -146,7 +146,7 @@
     } else {
         // it's a comment - calculate the height in a dummy view, and
         // then return it with some vertical padding
-        NSDictionary *commentInfo = photoInfo[@"comments"][@"data"][indexPath.row];
+        NSDictionary *commentInfo = photoInfo[@"comments"][@"data"][indexPath.row - 1];
         TTTAttributedLabel *commentLabel = [self commentLabelWithText:commentInfo[@"text"] withUsername:commentInfo[@"from"][@"username"]];
         
         CGSize commentSize = [commentLabel sizeThatFits:CGSizeMake(280, CGFLOAT_MAX)];
