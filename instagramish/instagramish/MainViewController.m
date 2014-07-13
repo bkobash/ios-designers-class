@@ -58,6 +58,7 @@
     UINib *commentNib = [UINib nibWithNibName:@"CommentCell" bundle:nil];
     [self.tableView registerNib:commentNib forCellReuseIdentifier:@"CommentCell"];
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //self.tableView.rowHeight = 270;
     
 }
@@ -112,7 +113,7 @@
     
     NSString *commentText = [NSString stringWithFormat:@"%@  %@", username, comment];
     
-    TTTAttributedLabel *commentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(20, 10, 280, 100)];
+    TTTAttributedLabel *commentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(20, 5, 280, 100)];
     commentLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     commentLabel.font = [UIFont systemFontOfSize:14];
     commentLabel.textColor = [UIColor darkGrayColor];
@@ -139,6 +140,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary *photoInfo = self.photos[indexPath.section];
+    NSInteger commentCount = [photoInfo[@"comments"][@"count"] intValue];
+    NSInteger totalRows = MIN(commentCount + 1, 4);
+    NSInteger verticalPadding = 10;
     
     if (indexPath.row == 0) {
         // it's a photo - return a static height
@@ -151,7 +155,12 @@
         
         CGSize commentSize = [commentLabel sizeThatFits:CGSizeMake(280, CGFLOAT_MAX)];
         //NSLog(@"Comment height: %f", commentSize.height);
-        return commentSize.height + 20;
+        
+        // add some extra space on the bottom if it's the last comment
+        if (indexPath.row == totalRows - 1) {
+            verticalPadding = 30;
+        }
+        return commentSize.height + verticalPadding;
     }
 }
 
@@ -161,25 +170,25 @@
     
     NSDictionary *photoInfo = self.photos[section];
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
     headerView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.9];
     
     // add the username
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 17, 250, 30)];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 14, 250, 30)];
     headerLabel.font = [UIFont boldSystemFontOfSize:16];
     headerLabel.textColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
     headerLabel.text = photoInfo[@"user"][@"username"];
     
     // add the user photo (in a circle)
     NSString *userPhotoUrl = photoInfo[@"user"][@"profile_picture"];
-    UIImageView *userPhotoView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 14, 40, 40)];
+    UIImageView *userPhotoView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
     userPhotoView.layer.cornerRadius = 20.0;
     [userPhotoView setClipsToBounds:YES];
     [userPhotoView setImageWithURL:[NSURL URLWithString:userPhotoUrl]];
     
-    // add a little rule on top
-    UIView *headerRule = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 4)];
-    headerRule.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+    // add a little rule on bottom
+    UIView *headerRule = [[UIView alloc] initWithFrame:CGRectMake(0, 59, 320, 1)];
+    headerRule.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
     
     [headerView addSubview:headerLabel];
     [headerView addSubview:headerRule];
@@ -191,7 +200,7 @@
 // set the height for the section header
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 64;
+    return 60;
 }
 
 
