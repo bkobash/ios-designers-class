@@ -142,6 +142,25 @@
 
 - (void)selectTab:(UIButton *)tab withViewController:(UIViewController *)vc {
     
+    CGPoint destScrollViewOffset = self.tabScrollView.contentOffset;
+    int tabPageXPosition = tab.center.x - destScrollViewOffset.x;
+    int selectedTabWidth = self.tabSelected.frame.size.width;
+    // NSLog(@"%d", tabPageXPosition);
+    
+    // reposition the scroll view contents if the selected tab is beyond
+    // the fold
+    if (tabPageXPosition - (selectedTabWidth / 2) < 0) {
+        destScrollViewOffset.x = 0;
+    } else if (tabPageXPosition + (selectedTabWidth / 2) > 320) {
+        destScrollViewOffset.x = 160;
+    }
+    
+    // animate both the scrollview and the circle around the selected tab
+    [UIView animateWithDuration:0.2 animations:^{
+        self.tabSelected.center = CGPointMake(tab.center.x, tab.center.y);
+        [self.tabScrollView setContentOffset:destScrollViewOffset animated:YES];
+    }];
+    
     if (vc) {
         // set the direction based on where the current tab's x-position relative to the target tab
         if (tab.center.x < self.tabSelected.center.x) {
@@ -149,16 +168,15 @@
             
 //            self.homePageViewController.dataSource = nil;
 //            self.homePageViewController.dataSource = self;
+            
         } else {
             [self.homePageViewController setViewControllers:@[vc] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+            
             
 //            self.homePageViewController.dataSource = nil;
 //            self.homePageViewController.dataSource = self;
         }
     }
-    [UIView animateWithDuration:0.2 animations:^{
-        self.tabSelected.center = CGPointMake(tab.center.x, tab.center.y);
-    }];
 }
 
 - (IBAction)onLinksTap:(id)sender {
