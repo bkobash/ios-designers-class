@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="chromeView" destination="tOu-lZ-wbc" id="u7H-vq-GTt"/>
                 <outlet property="contentView" destination="ud4-Mq-ZKQ" id="zXp-8E-4ie"/>
                 <outlet property="tabFiles" destination="o19-kr-DYm" id="28V-Qv-3Lw"/>
                 <outlet property="tabImages" destination="a2Q-DZ-ges" id="YRJ-f1-bW1"/>
@@ -133,6 +134,7 @@
                     <rect key="frame" x="0.0" y="195" width="320" height="373"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <gestureRecognizers/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

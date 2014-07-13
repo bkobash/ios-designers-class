@@ -18,6 +18,7 @@
 @interface HomeViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIView *chromeView;
 @property (weak, nonatomic) IBOutlet UIScrollView *tabScrollView;
 
 @property (strong, nonatomic) ListLinksViewController *listLinksViewController;
@@ -41,6 +42,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *tabTodos;
 @property (weak, nonatomic) IBOutlet UIImageView *tabSelected;
 
+@property (nonatomic) BOOL chromeIsCollapsed;
+@property (nonatomic) CGPoint originalContentViewLocation;
+@property (nonatomic) CGPoint originalChromeViewLocation;
+@property (nonatomic) CGSize originalContentViewSize;
+
 - (IBAction)onLinksTap:(id)sender;
 - (IBAction)onShoppingTap:(id)sender;
 - (IBAction)onNotesTap:(id)sender;
@@ -49,7 +55,7 @@
 - (IBAction)onSecureTap:(id)sender;
 - (IBAction)onTodosTap:(id)sender;
 
-- (void)selectTab:(UIButton*)tab;
+- (void)selectTab:(UIButton*)tab withViewController:(UIViewController *)vc;
 
 @end
 
@@ -103,6 +109,8 @@
     self.homePageViewController.view.frame = self.contentView.bounds;
     
     [self.contentView addSubview:self.homePageViewController.view];
+    
+    self.chromeIsCollapsed = NO;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
@@ -178,6 +186,45 @@
         }
     }
 }
+
+
+/*
+ 
+ */
+/*
+- (IBAction)onContentViewDrag:(UIPanGestureRecognizer *)sender {
+    
+    in progress - hide the search bar / chrome when the user
+       scrolls up. however, PanGestureRecognizer doesn't work well
+       with a PageViewController - looks like it nullifies it...
+ 
+ 
+    CGPoint location = [sender locationInView:self.view];
+    CGPoint translation = [sender translationInView:self.view];
+    CGPoint velocity = [sender velocityInView:self.view];
+    
+    int chromeViewY = 0;
+    int contentViewY = 0;
+    int contentViewHeight = 0;
+    int searchBarHeight = 108;
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"began");
+        self.originalChromeViewLocation = self.chromeView.frame.origin;
+        self.originalContentViewLocation = self.contentView.frame.origin;
+        self.originalContentViewSize = self.contentView.frame.size;
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"changed");
+        chromeViewY = MAX(self.originalChromeViewLocation.y + translation.y, 24 - searchBarHeight);
+        contentViewY = MAX(self.originalContentViewLocation.y + translation.y, 24);
+        contentViewHeight = MIN(self.originalContentViewSize.height - translation.y, 568 - searchBarHeight);
+        
+        self.chromeView.frame = CGRectMake(0, chromeViewY, self.chromeView.frame.size.width, self.chromeView.frame.size.height);
+        self.contentView.frame = CGRectMake(0, contentViewY, self.contentView.frame.size.width, contentViewHeight);
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+    }
+ 
+} */
 
 - (IBAction)onLinksTap:(id)sender {
     [self selectTab:self.tabLinks withViewController:self.listLinksViewController];
