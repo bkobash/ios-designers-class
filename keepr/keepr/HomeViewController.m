@@ -167,6 +167,9 @@
     [self.contentScrollView setDelegate:self];
     
     [self deselectTabsWithAnimation:NO];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [self selectTab:self.tabAll];
     [self populateTab:@"all"];
 }
@@ -260,7 +263,8 @@
             height = [self.cards[i][@"height"] intValue];
             
             // generate a new imageview
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, 320, height)];
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 600, 320, height)];
+            imageView.alpha = 0;
             [imageView setImage:[UIImage imageNamed:self.cards[i][@"image"]]];
             [imageView setUserInteractionEnabled:YES];
             
@@ -277,6 +281,7 @@
             [self.cardOffsets addObject:[NSNumber numberWithInt:height]];
             
             [self.contentScrollView addSubview:self.cardViews[count]];
+            [self.contentScrollView sendSubviewToBack:self.cardViews[count]];
             
             // update the y-position so the next card will stack underneath
             y = y + height;
@@ -293,6 +298,7 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.contentScrollView.contentOffset = CGPointMake(0, 0);
     }];
+    [self resetCardPositions];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -396,8 +402,9 @@
     for (int i = 0; i < self.cardViews.count; i++) {
         card = self.cardViews[i];
         height = [self.cardOffsets[i] intValue];
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             card.frame = CGRectMake(0, y, 320, height);
+            card.alpha = 1;
         } completion:^(BOOL finished) {
             
         }];
@@ -406,7 +413,7 @@
     
     // also animate the contentsize of the scrollview once everything has
     // been rearranged.
-    [UIView animateWithDuration:0.2 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.contentScrollView.contentSize = CGSizeMake(320, y);
     } completion:^(BOOL finished) {
         // done
