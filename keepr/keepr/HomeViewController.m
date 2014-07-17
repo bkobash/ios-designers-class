@@ -24,12 +24,13 @@
 
 @property (nonatomic, strong) NSArray *tabs;
 @property (nonatomic, strong) NSArray *cards;
+@property (nonatomic, strong) NSMutableArray *cardOffsets;
 @property (nonatomic, strong) NSMutableArray *cardViews;
 
-@property (nonatomic) BOOL chromeIsCollapsed;
-@property (nonatomic) CGPoint originalContentViewLocation;
-@property (nonatomic) CGPoint originalChromeViewLocation;
-@property (nonatomic) CGSize originalContentViewSize;
+@property (nonatomic) int selectedCardId;
+@property (nonatomic, strong) UIImageView *selectedCard;
+@property (nonatomic) CGPoint selectedCardOriginalPosition;
+
 
 - (IBAction)onTabAll:(id)sender;
 - (IBAction)onTabLinks:(id)sender;
@@ -38,10 +39,7 @@
 - (IBAction)onTabTodos:(id)sender;
 - (IBAction)onTabMore:(id)sender;
 
-
 - (void) deselectTabsWithAnimation:(BOOL)isAnimated exceptTab:(UIButton *)exceptTab;
-
-//- (void)selectTab:(UIButton*)tab withViewController:(UIViewController *)vc;
 
 @end
 
@@ -160,8 +158,7 @@
                       @"type" :     @"note"}
                    ];
     self.cardViews = [NSMutableArray array];
-    
-    self.chromeIsCollapsed = NO;
+    self.cardOffsets = [NSMutableArray array];
     
     [self.contentScrollView setDelegate:self];
     
@@ -232,6 +229,7 @@
 - (void) populateTab:(NSString *)tab {
     // clear everything out
     [self.cardViews removeAllObjects];
+    [self.cardOffsets removeAllObjects];
     for (UIView *subview in [self.contentScrollView subviews]) {
         [subview removeFromSuperview];
     }
@@ -252,7 +250,15 @@
             
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, 320, height)];
             [imageView setImage:[UIImage imageNamed:self.cards[i][@"image"]]];
+            [imageView setUserInteractionEnabled:YES];
+            
+            // add pan gesture recognizer
+            UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onCustomPan:)];
+            [panGestureRecognizer setDelegate:self];
+            [imageView addGestureRecognizer:panGestureRecognizer];
+            
             [self.cardViews addObject:imageView];
+            [self.cardOffsets addObject:[NSNumber numberWithInt:height]];
             
             [self.contentScrollView addSubview:self.cardViews[count]];
             
@@ -266,7 +272,6 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.contentScrollView.contentOffset = CGPointMake(0, 0);
     }];
-    //[self.contentScrollView setContentOffset:CGPointMake(0, 0)];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -286,6 +291,88 @@
     self.chromeView.backgroundColor = [UIColor colorWithRed:chromeShade green:chromeShade blue:chromeShade alpha:frameAlpha];
     self.buttonMenuMail.alpha = buttonAlpha;
     self.buttonMenuSettings.alpha = buttonAlpha;
+}
+
+- (void)onCustomPan:(UIPanGestureRecognizer *)panGestureRecognizer {
+    CGPoint translation = [panGestureRecognizer translationInView:self.view];
+    CGPoint point = [panGestureRecognizer locationInView:self.view];
+    CGPoint velocity = [panGestureRecognizer velocityInView:self.view];
+    
+    if (panGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        //NSLog(@"Gesture began at: %@", NSStringFromCGPoint(point));
+        self.selectedCardId = [self getCardAtYPosition:point.y];
+        self.selectedCard = self.cardViews[self.selectedCardId];
+        
+        self.selectedCardOriginalPosition = self.selectedCard.frame.origin;
+        //NSLog(@"%@", NSStringFromCGPoint(cardOriginalPosition));
+    } else if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        
+        self.selectedCard.frame = CGRectMake(self.selectedCardOriginalPosition.x + translation.x, self.selectedCardOriginalPosition.y, self.selectedCard.frame.size.width, self.selectedCard.frame.size.height);
+        //NSLog(@"Gesture changed: %@", NSStringFromCGPoint(point));
+    } else if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        //NSLog(@"Gesture ended: %@", NSStringFromCGPoint(point));
+        NSLog(@"velocity %@", NSStringFromCGPoint(velocity));
+        int offsetX;
+        if (velocity.x > 1000) {
+            offsetX = 320;
+        } else if (velocity.x < -1000) {
+            offsetX = -320;
+        } else {
+            offsetX = 0;
+        }
+        [UIView animateWithDuration:0.2 animations:^{
+            self.selectedCard.frame = CGRectMake(offsetX, self.selectedCardOriginalPosition.y, self.selectedCard.frame.size.width, self.selectedCard.frame.size.height);
+        } completion:^(BOOL finished) {
+            if (offsetX != 0) {
+                [self.cardOffsets removeObjectAtIndex:self.selectedCardId];
+                [self.cardViews removeObjectAtIndex:self.selectedCardId];
+                [self resetCardPositions];
+            }
+        }];
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES; //otherGestureRecognizer is your custom pan gesture
+}
+
+- (int)getCardAtYPosition:(CGFloat)yPos {
+    int card = 0;
+    int cardHeight = 0;
+    int yOffset = 0 - self.contentScrollView.contentOffset.y + self.contentScrollView.frame.origin.y;
+    for (int i = 0; i < self.cardOffsets.count; i++) {
+        cardHeight = [self.cardOffsets[i] intValue];
+        //NSLog(@"%d", cardHeight);
+        yOffset = yOffset + cardHeight;
+        if (yPos < yOffset) {
+            card = i;
+            break;
+        }
+    }
+    //NSLog(@"%d", card);
+    return card;
+}
+
+- (void)resetCardPositions {
+    int y = 0;
+    int height = 0;
+    UIImageView *card;
+    for (int i = 0; i < self.cardViews.count; i++) {
+        card = self.cardViews[i];
+        height = [self.cardOffsets[i] intValue];
+        [UIView animateWithDuration:0.2 animations:^{
+            card.frame = CGRectMake(0, y, 320, height);
+        } completion:^(BOOL finished) {
+            
+        }];
+        y = y + height;
+    }
+    [UIView animateWithDuration:0.2 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.contentScrollView.contentSize = CGSizeMake(320, y);
+    } completion:^(BOOL finished) {
+        // done
+    }];
+    
 }
 
 

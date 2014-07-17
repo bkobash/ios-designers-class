@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeViewController : UIViewController<UIScrollViewDelegate>
+@interface HomeViewController : UIViewController<UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @end
