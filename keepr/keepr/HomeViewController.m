@@ -247,6 +247,9 @@
     int y = self.chromeHeight;
     int totalCards = 0;
     int count = 0;
+    UIImageView *imageView;
+    UIPanGestureRecognizer *panGestureRecognizer;
+    
     
     // only show the most recent 5 cards if the user selects "all"
     if ([tab isEqualToString:@"all"]) {
@@ -264,13 +267,13 @@
             height = [self.cards[i][@"height"] intValue];
             
             // generate a new imageview
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 600, 320, height)];
+            imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 600, 320, height)];
             imageView.alpha = 0;
             [imageView setImage:[UIImage imageNamed:self.cards[i][@"image"]]];
             [imageView setUserInteractionEnabled:YES];
             
             // add pan gesture recognizer to all these cards
-            UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onCustomPan:)];
+            panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onCustomPan:)];
             [panGestureRecognizer setDelegate:self];
             [imageView addGestureRecognizer:panGestureRecognizer];
             
@@ -290,10 +293,16 @@
         }
     }
     
-    // add more stuff on the bottom?
+    // add more stuff on the bottom
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, 320, 55)];
+    [imageView setImage:[UIImage imageNamed:@"CardDone"]];
+    [self.contentScrollView addSubview:imageView];
+    [self.cardViews addObject:imageView];
+    [self.cardOffsets addObject:[NSNumber numberWithInt:55]];
+    
     
     // update the contentsize so all the content fits
-    [self.contentScrollView setContentSize:CGSizeMake(320, y)];
+    //[self.contentScrollView setContentSize:CGSizeMake(320, y)];
     
     // scroll to the top when the user switches tabs
     [UIView animateWithDuration:0.2 animations:^{
