@@ -30,6 +30,7 @@
 @property (nonatomic) int selectedCardId;
 @property (nonatomic, strong) UIImageView *selectedCard;
 @property (nonatomic) CGPoint selectedCardOriginalPosition;
+@property (nonatomic) BOOL cardLifted;
 
 @property (nonatomic) int chromeHeight;
 
@@ -336,13 +337,25 @@
         //NSLog(@"Gesture changed: %@", NSStringFromCGPoint(point));
         
         // move the card around based on simple translation
-        self.selectedCard.frame = CGRectMake(self.selectedCardOriginalPosition.x + translation.x, self.selectedCardOriginalPosition.y, self.selectedCard.frame.size.width, self.selectedCard.frame.size.height);
+        // but require a little bit of "give" before the user can drag
+        // left/right - since they might be scrolling
+        if (!self.cardLifted && (translation.x > 20 || translation.x < -20)) {
+            self.cardLifted = YES;
+            [UIView animateWithDuration:0.2 animations:^{
+                self.selectedCard.frame = CGRectMake(self.selectedCardOriginalPosition.x + translation.x, self.selectedCardOriginalPosition.y, self.selectedCard.frame.size.width, self.selectedCard.frame.size.height);
+            }];
+        } else if (self.cardLifted) {
+            self.selectedCard.frame = CGRectMake(self.selectedCardOriginalPosition.x + translation.x, self.selectedCardOriginalPosition.y, self.selectedCard.frame.size.width, self.selectedCard.frame.size.height);
+        }
         
     } else if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
         //NSLog(@"Gesture ended: %@", NSStringFromCGPoint(point));
         
         // if the user angrily swiped, then push the card out of the way
         //NSLog(@"velocity %@", NSStringFromCGPoint(velocity));
+        
+        self.cardLifted = NO;
+        
         int offsetX;
         if (velocity.x > 1000) {
             offsetX = 320;
