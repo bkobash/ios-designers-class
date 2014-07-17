@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface HomeViewController : UIViewController<UIScrollViewDelegate>
 
 @end
