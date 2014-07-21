@@ -255,7 +255,7 @@
     if ([tab isEqualToString:@"all"]) {
         totalCards = 5;
     } else {
-        totalCards = self.cards.count;
+        totalCards = (int)self.cards.count;
     }
     
     // loop through all the cards. if the user did not select "all",
