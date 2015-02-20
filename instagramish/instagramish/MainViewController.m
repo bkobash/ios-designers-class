@@ -30,7 +30,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/media/popular?access_token=1420818168.f59def8.31dc73aaaedc44d6801173d71a0c19fc"];
+        NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/media/popular?client_id=be9c77c3f005406093ec83d72e35a6c5"];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
